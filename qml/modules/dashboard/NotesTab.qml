@@ -18,6 +18,8 @@ Item {
     property int selectedIndex: -1
     readonly property var selectedNote: root.selectedIndex >= 0 && root.selectedIndex < root.notes.length ? root.notes[root.selectedIndex] : null
 
+    property bool previewMode: false
+
     function newNote(): void {
         const note = {
             id: Date.now(),
@@ -387,11 +389,50 @@ Item {
                     color: Colours.palette.m3outlineVariant
                 }
 
+                StyledRect {
+                    id: modeToggle
+
+                    Layout.alignment: Qt.AlignRight
+                    implicitWidth: modeLabel.implicitWidth + Tokens.padding.medium * 2
+                    implicitHeight: modeLabel.implicitHeight + Tokens.padding.small * 2
+                    radius: Tokens.rounding.full
+                    color: modeArea.containsMouse ? Colours.palette.m3secondaryContainer : Colours.tPalette.m3surfaceContainerHigh
+                    scale: modeArea.pressed ? 0.92 : 1
+
+                    Behavior on color {
+                        CAnim {}
+                    }
+
+                    Behavior on scale {
+                        Anim {
+                            type: Anim.EmphasizedSmall
+                        }
+                    }
+
+                    StyledText {
+                        id: modeLabel
+
+                        anchors.centerIn: parent
+                        text: Tr.tr(root.previewMode ? "Edit" : "Preview")
+                        font: Tokens.font.body.small
+                        color: Colours.palette.m3onSurfaceVariant
+                    }
+
+                    CustomMouseArea {
+                        id: modeArea
+
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+                        onClicked: root.previewMode = !root.previewMode
+                    }
+                }
+
                 Flickable {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     contentWidth: width
-                    contentHeight: bodyField.implicitHeight
+                    contentHeight: root.previewMode ? preview.implicitHeight : bodyField.implicitHeight
                     clip: true
                     boundsBehavior: Flickable.StopAtBounds
 
@@ -422,6 +463,19 @@ Item {
                             opacity: 0.5
                             color: Colours.palette.m3onSurfaceVariant
                         }
+                    }
+
+                    StyledText {
+                        id: preview
+
+                        width: parent.width
+                        visible: root.previewMode
+                        // Single newlines become paragraph breaks, so quick notes still render.
+                        text: root.selectedNote ? root.selectedNote.body.replace(/(.)\n(?!\n)/g, "$1\n\n") : ""
+                        textFormat: Text.MarkdownText
+                        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                        font: Tokens.font.body.medium
+                        color: Colours.palette.m3onSurface
                     }
                 }
 

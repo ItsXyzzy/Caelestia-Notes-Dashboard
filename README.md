@@ -5,15 +5,14 @@ Notes that you can save to your [Caelestia](https://github.com/caelestia-dots/sh
 ## Screenshot:
 
 ![Notes Screenshot](screenshots/notes_1.png)
-![Notes Screenshot 2](screenshots/notes_tab2.png)
 
-A notes panel with a list on the left and an editor on the right: add, rename, edit, and delete notes that persist across restarts and autosaves when closed.
+A notes panel with a list on the left and an editor on the right: add, rename, edit, and delete notes that persist across restarts.
 
 ## Install
 
 ```bash
-git clone https://github.com/ItsXyzzy/Caelestia-Notes-Dashboard
-cd Caelestia-Notes-Dashboard
+git clone <your-repo-url>
+cd <repo-folder>
 ./install.sh
 ```
 
@@ -37,6 +36,9 @@ It installs into `~/.config/quickshell/caelestia`, copying the system config the
 - The install hooks into the existing **Weather** dashboard tab (the Notes component is added right after it). If your `Content.qml` doesn't have the stock weather tab, the installer will refuse to run — install caelestia-shell unmodified first.
 - Typing in Notes needs the dashboard to accept keyboard focus, so the installer adds one condition to `ContentWindow.qml`. The whole dashboard now grabs focus while open.
 - Your notes are saved to `~/.local/state/caelestia/notes_tab.json`.
+- The body editor has an **Edit/Preview** toggle. Preview renders your note as markdown
+  (`**bold**`, `*italic*`, `` `code` ``, `# headings`, `- lists`, `[links](url)`) while
+  the note stays plain text on disk.
 - Only tested on Cachy with Hyprland.
 
 ## Manual install
