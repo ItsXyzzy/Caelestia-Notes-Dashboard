@@ -5,14 +5,15 @@ Notes that you can save to your [Caelestia](https://github.com/caelestia-dots/sh
 ## Screenshot:
 
 ![Notes Screenshot](screenshots/notes_1.png)
+![Notes Screenshot 2](screenshots/notes_tab2.png)
 
-A notes panel with a list on the left and an editor on the right: add, rename, edit, and delete notes that persist across restarts.
+A notes panel with a list on the left and an editor on the right: add, rename, edit, and delete notes that persist across restarts and autosaves when closed.
 
 ## Install
 
 ```bash
-git clone <your-repo-url>
-cd <repo-folder>
+git clone https://github.com/ItsXyzzy/Caelestia-Notes-Dashboard
+cd Caelestia-Notes-Dashboard
 ./install.sh
 ```
 
