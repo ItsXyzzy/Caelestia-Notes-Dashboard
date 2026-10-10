@@ -6,9 +6,9 @@ A restyled battery popout for the [Caelestia](https://github.com/caelestia-dots/
 - The time left shown inside the gauge, like `6h 29m left`, or `28m to full` while charging
 - Turns green and pulses while charging
 
-## Screenshots
-![Battery Screenshot](screenshots/batt_1.png)
-![Battery Screenshot](screenshots/batt_2.png)
+![Notes Screenshot](screenshots/notes_1.png)
+
+A notes panel with a list on the left and an editor on the right: add, rename, edit, and delete notes that persist across restarts.
 
 ## Install
 
@@ -34,10 +34,14 @@ Run it again any time to change them. Then restart the shell. Don't use sudo. It
 
 ## Good to know
 
-- It replaces the stock `Battery.qml`. The original is saved as `Battery.qml.bak`. If you've customised it, back it up first.
-- The charging green is fixed, not taken from your colour scheme.
-- Tested on Caelestia v2.5.0
-- Only tested on CachyOS with Hyprland.
+- Registering the tab modifies `Content.qml`. The original is saved as `.bak`, and restoring it is part of the uninstaller.
+- The install hooks into the existing **Weather** dashboard tab (the Notes component is added right after it). If your `Content.qml` doesn't have the stock weather tab, the installer will refuse to run — install caelestia-shell unmodified first.
+- Typing in Notes needs the dashboard to accept keyboard focus, so the installer adds one condition to `ContentWindow.qml`. The whole dashboard now grabs focus while open.
+- Your notes are saved to `~/.local/state/caelestia/notes_tab.json`.
+- The body editor has an **Edit/Preview** toggle. Preview renders your note as markdown
+  (`**bold**`, `*italic*`, `` `code` ``, `# headings`, `- lists`, `[links](url)`) while
+  the note stays plain text on disk.
+- Only tested on Cachy with Hyprland.
 
 ## Manual install
 
