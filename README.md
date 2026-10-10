@@ -11,8 +11,8 @@ A notes panel with a list on the left and an editor on the right: add, rename, e
 ## Install
 
 ```bash
-git clone <your-repo-url>
-cd <repo-folder>
+git clone https://github.com/ItsXyzzy/Caelestia-Notes-Dashboard
+cd Caelestia-Notes-Dashboard
 ./install.sh
 ```
 
